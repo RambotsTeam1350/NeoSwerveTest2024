@@ -31,8 +31,8 @@ public final class Constants {
   }
 
   //Motor Controller IDs
-  public static final int motor1 = 1;
-  public static final int motor2 = 2;
+  public static final int motor1 = 11;
+  public static final int motor2 = 22;
 
 
   public static final class CurrentLimit {
