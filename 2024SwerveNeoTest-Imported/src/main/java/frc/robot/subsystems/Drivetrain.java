@@ -137,7 +137,7 @@ public class Drivetrain extends SubsystemBase {
     m_latestSlew[0] = xSpeed;
     m_latestSlew[1] = ySpeed;
     m_latestSlew[2] = rot;
-
+    
     if (keepAngle) {
       rot = performKeepAngle(xSpeed, ySpeed, rot); // Calls the keep angle function to update the keep angle or rotate
     }

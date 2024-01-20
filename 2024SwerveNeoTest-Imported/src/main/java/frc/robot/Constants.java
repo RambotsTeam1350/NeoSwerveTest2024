@@ -30,6 +30,11 @@ public final class Constants {
     public static final double kLinear = 0.05;
   }
 
+  //Motor Controller IDs
+  public static final int motor1 = 1;
+  public static final int motor2 = 2;
+
+
   public static final class CurrentLimit {
     public static final int kDrive = 60;
     public static final int kAzimuth = 20;

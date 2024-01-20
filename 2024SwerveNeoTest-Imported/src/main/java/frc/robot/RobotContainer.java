@@ -9,13 +9,18 @@ import frc.robot.commands.DriveRobot;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.MotorControllerTest;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -37,7 +42,30 @@ public class RobotContainer {
   private final CommandXboxController m_driverController = new CommandXboxController(
       OperatorConstants.kDriverControllerPort);
 
+
+  //Controllers
+  private final Joystick control = new Joystick(0);
+
+
+  //Motor Test buttons
+    private final JoystickButton motorOut = new JoystickButton(control, XboxController.Button.kB.value);
+    private final JoystickButton motorIn = new JoystickButton(control, XboxController.Button.kA.value);
+
   private final DriveRobot m_drive = new DriveRobot(m_drivetrain, m_driverController);
+
+  //Motor objects
+  public final MotorControllerTest m_motor = new MotorControllerTest();
+
+  //Button configs
+  private void configureButtonBindings() {
+      //Driver buttons
+      motorOut.onTrue(new InstantCommand(() -> m_motor.motorSpeed(0.2)));
+      motorOut.onFalse(new InstantCommand(() -> m_motor.motorSpeed(0)));
+
+      motorIn.onTrue(new InstantCommand(() -> m_motor.motorSpeed(-0.2)));
+      motorIn.onFalse(new InstantCommand(() -> m_motor.motorSpeed(0)));
+
+    }
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -48,6 +76,10 @@ public class RobotContainer {
     SmartDashboard.putData("Auto Chooser", m_chooser);
     // Configure the trigger bindings
     configureBindings();
+    configureButtonBindings();
+
+
+    
   }
 
   /**
