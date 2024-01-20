@@ -5,7 +5,6 @@
 package frc.robot.commands;
 
 import frc.robot.Robot;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.MotorControllerTest;
 import edu.wpi.first.wpilibj2.command.Command;
 
@@ -17,6 +16,7 @@ public class MotorControllerCommand extends Command {
 
   public MotorControllerCommand() {
     this.m_motor = Robot.m_motor;
+
     addRequirements(this.m_motor);
   }  
 
