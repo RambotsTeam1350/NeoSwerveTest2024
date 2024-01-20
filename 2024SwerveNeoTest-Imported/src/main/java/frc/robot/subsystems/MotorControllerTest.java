@@ -17,7 +17,7 @@ public class MotorControllerTest extends SubsystemBase {
 
   
   public MotorControllerTest() {
-    motor1 = new CANSparkMax(Constants.motor2, MotorType.kBrushed);
+    motor1 = new CANSparkMax(Constants.motor1, MotorType.kBrushed);
     motor2 = new CANSparkMax(Constants.motor2, MotorType.kBrushed);
 
     motor1.setIdleMode(IdleMode.kBrake);

@@ -54,16 +54,16 @@ public class RobotContainer {
   private final DriveRobot m_drive = new DriveRobot(m_drivetrain, m_driverController);
 
   //Motor objects
-  public final MotorControllerTest m_motor = new MotorControllerTest();
+  public final MotorControllerTest motorObj = new MotorControllerTest();
 
   //Button configs
   private void configureButtonBindings() {
       //Driver buttons
-      motorOut.onTrue(new InstantCommand(() -> m_motor.motorSpeed(0.2)));
-      motorOut.onFalse(new InstantCommand(() -> m_motor.motorSpeed(0)));
+      motorOut.onTrue(new InstantCommand(() -> motorObj.motorSpeed(0.2)));
+      motorOut.onFalse(new InstantCommand(() -> motorObj.motorSpeed(0)));
 
-      motorIn.onTrue(new InstantCommand(() -> m_motor.motorSpeed(-0.2)));
-      motorIn.onFalse(new InstantCommand(() -> m_motor.motorSpeed(0)));
+      motorIn.onTrue(new InstantCommand(() -> motorObj.motorSpeed(-0.2)));
+      motorIn.onFalse(new InstantCommand(() -> motorObj.motorSpeed(0)));
 
     }
 
