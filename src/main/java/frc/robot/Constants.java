@@ -31,9 +31,12 @@ public final class Constants {
   }
 
   //Motor Controller IDs
-  public static final int motor1 = 11;
-  public static final int motor2 = 22;
-
+  public static class MotorPorts {
+    public static class Shooter {
+      public static final int kMotor1 = 11;
+      public static final int kMotor2 = 22;
+    }
+  }
 
   public static final class CurrentLimit {
     public static final int kDrive = 60;

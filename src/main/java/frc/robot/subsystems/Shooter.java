@@ -11,14 +11,14 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class MotorControllerTest extends SubsystemBase {
+public class Shooter extends SubsystemBase {
   CANSparkMax motor1;
   CANSparkMax motor2;
 
   
-  public MotorControllerTest() {
-    motor1 = new CANSparkMax(Constants.motor1, MotorType.kBrushless);
-    motor2 = new CANSparkMax(Constants.motor2, MotorType.kBrushless);
+  public Shooter() {
+    motor1 = new CANSparkMax(Constants.MotorPorts.Shooter.kMotor1, MotorType.kBrushless);
+    motor2 = new CANSparkMax(Constants.MotorPorts.Shooter.kMotor2, MotorType.kBrushless);
 
     motor1.setIdleMode(IdleMode.kBrake);
     motor2.setIdleMode(IdleMode.kBrake);

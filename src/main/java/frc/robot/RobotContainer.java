@@ -5,11 +5,8 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.DriveRobot;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.Drivetrain;
-import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.MotorControllerTest;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 
@@ -33,53 +30,36 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final Drivetrain m_drivetrain = new Drivetrain();
-  private final SendableChooser<Command> m_chooser;
-
-  // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController = new CommandXboxController(
-      OperatorConstants.kDriverControllerPort);
+    OperatorConstants.kDriverControllerPort);
+  
+  // The robot's subsystems and commands are defined here...
+  private final Drivetrain m_Drivetrain = new Drivetrain();
+  private final Shooter m_Shooter = new Shooter();
+  private final Drive m_Drive = new Drive(m_Drivetrain, m_driverController);
+  // private final SendableChooser<Command> m_chooser;
 
+  // TODO: redo controller binding bc this is not the best way to do it
+  // anymore but i have to actually know what the buttons do before i can fix it
+  // the below code up until the constructor will likely be deleted after i change the binding methods
 
-  //Controllers
-  private final Joystick control = new Joystick(0);
+  // Controllers
+  private final Joystick m_control = new Joystick(0);
 
-
-  //Motor Test buttons
-    private final JoystickButton motorOut = new JoystickButton(control, XboxController.Button.kB.value);
-    private final JoystickButton motorIn = new JoystickButton(control, XboxController.Button.kA.value);
-
-  private final DriveRobot m_drive = new DriveRobot(m_drivetrain, m_driverController);
-
-  //Motor objects
-  public final MotorControllerTest m_motor = new MotorControllerTest();
-
-  //Button configs
-  private void configureButtonBindings() {
-      //Driver buttons
-      motorOut.onTrue(new InstantCommand(() -> m_motor.motorSpeed(0.2)));
-      motorOut.onFalse(new InstantCommand(() -> m_motor.motorSpeed(0)));
-
-      motorIn.onTrue(new InstantCommand(() -> m_motor.motorSpeed(-0.2)));
-      motorIn.onFalse(new InstantCommand(() -> m_motor.motorSpeed(0)));
-
-    }
+  // Motor Test buttons
+  private final JoystickButton m_MotorOut = new JoystickButton(m_control, XboxController.Button.kB.value);
+  private final JoystickButton m_MotorIn = new JoystickButton(m_control, XboxController.Button.kA.value);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    m_drivetrain.setDefaultCommand(m_drive);
-    m_chooser = AutoBuilder.buildAutoChooser();
-    SmartDashboard.putData("Auto Chooser", m_chooser);
+    m_Drivetrain.setDefaultCommand(m_Drive);
+    // m_chooser = AutoBuilder.buildAutoChooser();
+    // SmartDashboard.putData("Auto Chooser", m_chooser);
     // Configure the trigger bindings
     configureBindings();
-    configureButtonBindings();
 
-
-    
   }
 
   /**
@@ -97,14 +77,11 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    m_MotorOut.onTrue(new InstantCommand(() -> m_Shooter.motorSpeed(0.2)));
+    m_MotorOut.onFalse(new InstantCommand(() -> m_Shooter.motorSpeed(0)));
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is
-    // pressed,
-    // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    m_MotorIn.onTrue(new InstantCommand(() -> m_Shooter.motorSpeed(-0.2)));
+    m_MotorIn.onFalse(new InstantCommand(() -> m_Shooter.motorSpeed(0)));
   }
 
   /**
@@ -112,7 +89,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    return m_chooser.getSelected();
-  }
+  // public Command getAutonomousCommand() {
+  // return m_chooser.getSelected();
+  // }
 }

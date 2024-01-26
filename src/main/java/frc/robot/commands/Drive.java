@@ -7,14 +7,14 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.utilities.MathUtils;
 
-public class DriveRobot extends Command {
-    private final Drivetrain m_drivetrain;
+public class Drive extends Command {
+    private final Drivetrain m_Drivetrain;
     private final CommandXboxController m_controller;
 
-    public DriveRobot(Drivetrain drivetrain, CommandXboxController controller) {
-        m_drivetrain = drivetrain;
+    public Drive(Drivetrain drivetrain, CommandXboxController controller) {
+        m_Drivetrain = drivetrain;
         m_controller = controller;
-        addRequirements(m_drivetrain);
+        addRequirements(m_Drivetrain);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class DriveRobot extends Command {
 
         double desiredRot = -MathUtils.inputTransform(m_controller.getRightX()) * DriveConstants.kMaxAngularSpeed;
 
-        m_drivetrain.drive(desiredTrans[0], desiredTrans[1], desiredRot, true, true);
+        m_Drivetrain.drive(desiredTrans[0], desiredTrans[1], desiredRot, true, true);
 
         SmartDashboard.putBoolean("DrivingByController", true);
     }

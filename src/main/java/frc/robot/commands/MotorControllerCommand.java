@@ -4,22 +4,17 @@
 
 package frc.robot.commands;
 
-import frc.robot.Robot;
-import frc.robot.subsystems.MotorControllerTest;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 
 /** An example command that uses an example subsystem. */
 public class MotorControllerCommand extends Command {
-  @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
+  private Shooter m_Shooter;
 
-  private MotorControllerTest m_motor;
-
-  public MotorControllerCommand() {
-    this.m_motor = Robot.m_motor;
-
-    addRequirements(this.m_motor);
-  }  
-
+  public MotorControllerCommand(Shooter shooter) {
+    this.m_Shooter = shooter;
+    addRequirements(this.m_Shooter);
+  }
 
   // Called when the command is initially scheduled.
   @Override
