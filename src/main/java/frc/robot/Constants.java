@@ -30,11 +30,10 @@ public final class Constants {
     public static final double kLinear = 0.05;
   }
 
-  //Motor Controller IDs
-  public static class MotorPorts {
+  // Motors
+  public static class Motors {
     public static class Shooter {
-      public static final int kMotor1 = 11;
-      public static final int kMotor2 = 22;
+      public static final int[] ids = { 11, 22 };
     }
   }
 

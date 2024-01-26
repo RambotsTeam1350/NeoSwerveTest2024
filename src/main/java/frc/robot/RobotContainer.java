@@ -36,6 +36,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_Drivetrain = new Drivetrain();
   private final Shooter m_Shooter = new Shooter();
+  
   private final Drive m_Drive = new Drive(m_Drivetrain, m_driverController);
   // private final SendableChooser<Command> m_chooser;
 
@@ -77,11 +78,11 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    m_MotorOut.onTrue(new InstantCommand(() -> m_Shooter.motorSpeed(0.2)));
-    m_MotorOut.onFalse(new InstantCommand(() -> m_Shooter.motorSpeed(0)));
+    m_MotorOut.onTrue(new InstantCommand(() -> m_Shooter.setSpeed(0.2)));
+    m_MotorOut.onFalse(new InstantCommand(() -> m_Shooter.setSpeed(0)));
 
-    m_MotorIn.onTrue(new InstantCommand(() -> m_Shooter.motorSpeed(-0.2)));
-    m_MotorIn.onFalse(new InstantCommand(() -> m_Shooter.motorSpeed(0)));
+    m_MotorIn.onTrue(new InstantCommand(() -> m_Shooter.setSpeed(-0.2)));
+    m_MotorIn.onFalse(new InstantCommand(() -> m_Shooter.setSpeed(0)));
   }
 
   /**
