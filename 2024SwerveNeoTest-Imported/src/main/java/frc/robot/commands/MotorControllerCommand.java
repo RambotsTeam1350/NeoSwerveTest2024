@@ -18,7 +18,7 @@ public class MotorControllerCommand extends Command {
     this.m_motor = Robot.m_motor;
 
     addRequirements(this.m_motor);
-  }  
+  }
 
 
   // Called when the command is initially scheduled.

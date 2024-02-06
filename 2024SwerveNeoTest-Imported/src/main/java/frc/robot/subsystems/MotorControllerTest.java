@@ -30,6 +30,8 @@ public class MotorControllerTest extends SubsystemBase {
     motor2.set(speed);
 
     System.out.println(speed);
+    System.out.println(motor1.getEncoder().getVelocity());
+    System.out.println(motor2.getEncoder().getVelocity());
 
   }
 
