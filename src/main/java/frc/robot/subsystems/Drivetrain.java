@@ -89,6 +89,12 @@ public class Drivetrain extends SubsystemBase {
     m_odometry.resetPosition(ahrs.getRotation2d(), getModulePositions(), new Pose2d());
     ahrs.reset();
 
+    Timer.delay(1.0);
+    m_FLModule.resetToAbsolute();
+    m_FRModule.resetToAbsolute();
+    m_RLModule.resetToAbsolute();
+    m_RRModule.resetToAbsolute();
+
     // Configure the AutoBuilder last
     AutoBuilder.configureHolonomic(
         this::getPose, // Robot pose supplier
@@ -113,7 +119,8 @@ public class Drivetrain extends SubsystemBase {
                                                                                                                          // module.
             new ReplanningConfig() // Default path replanning config. See the API for the options here
         ),
-        () -> false, // PLESE NOTE, VERY IMPORTANT, I DO NOT KNOW WHAT THIS IS SUPPOSED TO DO AND THIS MAY NOT BE RIGHT - Nick
+        () -> false, // PLESE NOTE, VERY IMPORTANT, I DO NOT KNOW WHAT THIS IS SUPPOSED TO DO AND
+                     // THIS MAY NOT BE RIGHT - Nick
         this // Reference to this subsystem to set requirements
     );
   }
@@ -137,7 +144,7 @@ public class Drivetrain extends SubsystemBase {
     m_latestSlew[0] = xSpeed;
     m_latestSlew[1] = ySpeed;
     m_latestSlew[2] = rot;
-    
+
     if (keepAngle) {
       rot = performKeepAngle(xSpeed, ySpeed, rot); // Calls the keep angle function to update the keep angle or rotate
     }

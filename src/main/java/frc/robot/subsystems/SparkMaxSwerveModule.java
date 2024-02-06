@@ -85,6 +85,10 @@ public class SparkMaxSwerveModule extends SubsystemBase {
         m_azimuthMotor.burnFlash();
     }
 
+    public void resetToAbsolute() {
+        m_absEncoder.reset();
+    }
+
     /**
      * Returns the current state of the module.
      *
