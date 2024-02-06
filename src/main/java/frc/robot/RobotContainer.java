@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -31,25 +32,19 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   private final CommandXboxController m_driverController = new CommandXboxController(
-    OperatorConstants.kDriverControllerPort);
-  
+      OperatorConstants.kDriverControllerPort);
+
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_Drivetrain = new Drivetrain();
   private final Shooter m_Shooter = new Shooter();
-  
+
   private final Drive m_Drive = new Drive(m_Drivetrain, m_driverController);
   // private final SendableChooser<Command> m_chooser;
 
   // TODO: redo controller binding bc this is not the best way to do it
   // anymore but i have to actually know what the buttons do before i can fix it
-  // the below code up until the constructor will likely be deleted after i change the binding methods
-
-  // Controllers
-  private final Joystick m_control = new Joystick(0);
-
-  // Motor Test buttons
-  private final JoystickButton m_MotorOut = new JoystickButton(m_control, XboxController.Button.kB.value);
-  private final JoystickButton m_MotorIn = new JoystickButton(m_control, XboxController.Button.kA.value);
+  // the below code up until the constructor will likely be deleted after i change
+  // the binding methods
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -78,11 +73,21 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    m_MotorOut.onTrue(new InstantCommand(() -> m_Shooter.setSpeed(0.2)));
-    m_MotorOut.onFalse(new InstantCommand(() -> m_Shooter.setSpeed(0)));
+    m_driverController.b().toggleOnTrue(Commands.startEnd(
+        // command start
+        () -> m_Shooter.setSpeed(0.2),
+        // command end
+        () -> m_Shooter.stop(),
+        // required subsystem
+        m_Shooter));
 
-    m_MotorIn.onTrue(new InstantCommand(() -> m_Shooter.setSpeed(-0.2)));
-    m_MotorIn.onFalse(new InstantCommand(() -> m_Shooter.setSpeed(0)));
+    m_driverController.a().toggleOnTrue(Commands.startEnd(
+        // command start
+        () -> m_Shooter.setSpeed(0.2),
+        // command end
+        () -> m_Shooter.stop(),
+        // required subsystem
+        m_Shooter));
   }
 
   /**
