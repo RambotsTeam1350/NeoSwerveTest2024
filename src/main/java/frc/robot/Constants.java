@@ -23,7 +23,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class OperatorConstants {
+  public static class Operator {
     public static final int kDriverControllerPort = 0;
     public static final double kDeadband = 0.08;
     public static final double kCubic = 0.95;
@@ -33,7 +33,7 @@ public final class Constants {
   // Motors
   public static class Motors {
     public static class Shooter {
-      public static final int[] ids = { 11, 22 };
+      public static final int[] ids = { 0, 0 };
     }
   }
 

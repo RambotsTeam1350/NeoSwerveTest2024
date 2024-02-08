@@ -1,7 +1,7 @@
 package frc.robot.utilities;
 
 import edu.wpi.first.math.geometry.Translation2d;
-import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.Operator;
 
 public class MathUtils {
   public static double toUnitCircAngle(double angle) {
@@ -14,19 +14,19 @@ public class MathUtils {
   }
 
   public static double applyDeadband(double input) {
-    if (Math.abs(input) < OperatorConstants.kDeadband) {
+    if (Math.abs(input) < Operator.kDeadband) {
       return 0.0;
     } else if (input < 0.0) {
-      return (input + OperatorConstants.kDeadband) * (1.0 / (1 - OperatorConstants.kDeadband));
+      return (input + Operator.kDeadband) * (1.0 / (1 - Operator.kDeadband));
     } else if (input > 0.0) {
-      return (input - OperatorConstants.kDeadband) * (1.0 / (1 - OperatorConstants.kDeadband));
+      return (input - Operator.kDeadband) * (1.0 / (1 - Operator.kDeadband));
     } else {
       return 0.0;
     }
   }
 
   public static double inputTransform(double input) {
-    return cubicLinear(applyDeadband(input), OperatorConstants.kCubic, OperatorConstants.kLinear);
+    return cubicLinear(applyDeadband(input), Operator.kCubic, Operator.kLinear);
   }
 
   public static double[] inputTransform(double x, double y) {
@@ -39,8 +39,8 @@ public class MathUtils {
     }
 
     if (mag != 0) {
-      x = x / mag * cubicLinear(mag, OperatorConstants.kCubic, OperatorConstants.kLinear);
-      y = y / mag * cubicLinear(mag, OperatorConstants.kCubic, OperatorConstants.kLinear);
+      x = x / mag * cubicLinear(mag, Operator.kCubic, Operator.kLinear);
+      y = y / mag * cubicLinear(mag, Operator.kCubic, Operator.kLinear);
     } else {
       x = 0;
       y = 0;

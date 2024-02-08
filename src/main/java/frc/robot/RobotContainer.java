@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.Operator;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
@@ -32,19 +32,14 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   private final CommandXboxController m_driverController = new CommandXboxController(
-      OperatorConstants.kDriverControllerPort);
+      Operator.kDriverControllerPort);
 
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_Drivetrain = new Drivetrain();
-  private final Shooter m_Shooter = new Shooter();
+  // private final Shooter m_Shooter = new Shooter();
 
   private final Drive m_Drive = new Drive(m_Drivetrain, m_driverController);
   // private final SendableChooser<Command> m_chooser;
-
-  // TODO: redo controller binding bc this is not the best way to do it
-  // anymore but i have to actually know what the buttons do before i can fix it
-  // the below code up until the constructor will likely be deleted after i change
-  // the binding methods
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -73,21 +68,21 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    m_driverController.b().toggleOnTrue(Commands.startEnd(
-        // command start
-        () -> m_Shooter.setSpeed(0.2),
-        // command end
-        () -> m_Shooter.stop(),
-        // required subsystem
-        m_Shooter));
+    // m_driverController.b().toggleOnTrue(Commands.startEnd(
+    // // command start
+    // () -> m_Shooter.setSpeed(0.2),
+    // // command end
+    // () -> m_Shooter.stop(),
+    // // required subsystem
+    // m_Shooter));
 
-    m_driverController.a().toggleOnTrue(Commands.startEnd(
-        // command start
-        () -> m_Shooter.setSpeed(0.2),
-        // command end
-        () -> m_Shooter.stop(),
-        // required subsystem
-        m_Shooter));
+    // m_driverController.a().toggleOnTrue(Commands.startEnd(
+    // // command start
+    // () -> m_Shooter.setSpeed(0.2),
+    // // command end
+    // () -> m_Shooter.stop(),
+    // // required subsystem
+    // m_Shooter));
   }
 
   /**
