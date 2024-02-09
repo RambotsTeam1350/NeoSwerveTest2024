@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.AnalogEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CurrentLimit;
 import frc.robot.Constants.GlobalConstants;
-import frc.robot.Constants.ModuleConstants.Aziumth;
+import frc.robot.Constants.ModuleConstants.Azimuth;
 import frc.robot.Constants.ModuleConstants.Drive;
 
 /**
@@ -56,9 +56,9 @@ public class SparkMaxSwerveModule extends SubsystemBase {
         m_driveEnc.setMeasurementPeriod(16);
 
         m_drivePID = m_driveMotor.getPIDController();
-        m_drivePID.setP(Drive.kp);
+        m_drivePID.setP(Drive.kP);
 
-        m_driveFF = new SimpleMotorFeedforward(Drive.ks, Drive.kv);
+        m_driveFF = new SimpleMotorFeedforward(Drive.kS, Drive.kV);
 
         m_driveMotor.burnFlash();
 
@@ -69,13 +69,13 @@ public class SparkMaxSwerveModule extends SubsystemBase {
         m_azimuthMotor.setIdleMode(IdleMode.kBrake);
 
         m_azimuthEnc = m_azimuthMotor.getEncoder();
-        m_azimuthEnc.setPositionConversionFactor(Aziumth.kPositionFactor);
-        m_azimuthEnc.setVelocityConversionFactor(Aziumth.kVelocityFactor);
+        m_azimuthEnc.setPositionConversionFactor(Azimuth.kPositionFactor);
+        m_azimuthEnc.setVelocityConversionFactor(Azimuth.kVelocityFactor);
         m_azimuthEnc.setAverageDepth(4);
         m_azimuthEnc.setMeasurementPeriod(16);
 
         m_azimuthPID = m_azimuthMotor.getPIDController();
-        m_azimuthPID.setP(Aziumth.kp);
+        m_azimuthPID.setP(Azimuth.kP);
 
         m_absEncoder = new AnalogEncoder(absEnc);
         m_offset = offset;

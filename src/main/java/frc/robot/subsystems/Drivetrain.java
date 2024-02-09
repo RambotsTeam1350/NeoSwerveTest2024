@@ -89,11 +89,11 @@ public class Drivetrain extends SubsystemBase {
     m_odometry.resetPosition(ahrs.getRotation2d(), getModulePositions(), new Pose2d());
     ahrs.reset();
 
-    Timer.delay(1.0);
-    m_FLModule.resetToAbsolute();
-    m_FRModule.resetToAbsolute();
-    m_RLModule.resetToAbsolute();
-    m_RRModule.resetToAbsolute();
+    // Timer.delay(1.0);
+    // m_FLModule.resetToAbsolute();
+    // m_FRModule.resetToAbsolute();
+    // m_RLModule.resetToAbsolute();
+    // m_RRModule.resetToAbsolute();
 
     // Configure the AutoBuilder last
     AutoBuilder.configureHolonomic(

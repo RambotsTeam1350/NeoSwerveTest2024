@@ -49,16 +49,16 @@ public final class Constants {
       public static final double kPositionFactor = (1.0 / kGearRatio) * kWheelDiameter * Math.PI;
       public static final double kVelocityFactor = kPositionFactor / 60.0;
       public static final double kNEOMaxSpeed = 5820.0;
-      public static final double kp = 0.15;
-      public static final double ks = 0.01;
-      public static final double kv = 1.0 / (kNEOMaxSpeed * kVelocityFactor);
+      public static final double kP = 0.15;
+      public static final double kS = 0.01;
+      public static final double kV = 1.0 / (kNEOMaxSpeed * kVelocityFactor);
     }
 
-    public static final class Aziumth {
+    public static final class Azimuth {
       public static final double kGearRatio = (50.0 / 14.0) * (72.0 / 14.0);
       public static final double kPositionFactor = 1 / (kGearRatio) * 2 * Math.PI;
       public static final double kVelocityFactor = kPositionFactor / 60.0;
-      public static final double kp = 3.00;
+      public static final double kP = 2.00;
     }
 
   }
