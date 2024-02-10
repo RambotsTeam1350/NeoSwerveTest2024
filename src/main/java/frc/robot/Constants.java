@@ -4,12 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
-
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean
@@ -23,106 +17,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-  public static class Operator {
-    public static final int kDriverControllerPort = 0;
-    public static final double kDeadband = 0.08;
-    public static final double kCubic = 0.95;
-    public static final double kLinear = 0.05;
-  }
-
-  // Motors
-  public static class Motors {
-    public static class Shooter {
-      public static final int[] ids = { 0, 0 };
-    }
-  }
-
-  public static final class CurrentLimit {
-    public static final int kDrive = 60;
-    public static final int kAzimuth = 20;
-  }
-
-  public static final class ModuleConstants {
-    public static final class Drive {
-      public static final double kGearRatio = (36.0 / 14.0) * (18.0 / 24.0) * (45.0 / 15.0);
-      public static final double kWheelDiameter = 0.096706557;
-      public static final double kPositionFactor = (1.0 / kGearRatio) * kWheelDiameter * Math.PI;
-      public static final double kVelocityFactor = kPositionFactor / 60.0;
-      public static final double kNEOMaxSpeed = 5820.0;
-      public static final double kP = 0.15;
-      public static final double kS = 0.01;
-      public static final double kV = 1.0 / (kNEOMaxSpeed * kVelocityFactor);
-    }
-
-    public static final class Azimuth {
-      public static final double kGearRatio = (50.0 / 14.0) * (72.0 / 14.0);
-      public static final double kPositionFactor = 1 / (kGearRatio) * 2 * Math.PI;
-      public static final double kVelocityFactor = kPositionFactor / 60.0;
-      public static final double kP = 2.00;
-    }
-
-  }
-
-  public static final class DriveConstants {
-
-    public static final double kWheelBaseWidth = 0.4826;
-    public static final double kWheelBaseLength = 0.4826;
-
-    public static final class FrontLeft {
-      public static final int kDrive = 41;
-      public static final int kAziumth = 42;
-      public static final int kAbsEnc = 4;
-      public static final double kOffset = 0.0;
-      public static final Translation2d kLocation = new Translation2d(kWheelBaseLength / 2, kWheelBaseWidth / 2);
-    }
-
-    public static final class FrontRight {
-      public static final int kDrive = 31;
-      public static final int kAziumth = 32;
-      public static final int kAbsEnc = 3;
-      public static final double kOffset = 5.7;
-      public static final Translation2d kLocation = new Translation2d(kWheelBaseLength / 2, -kWheelBaseWidth / 2);
-    }
-
-    public static final class RearLeft {
-      public static final int kDrive = 11;
-      public static final int kAziumth = 12;
-      public static final int kAbsEnc = 1;
-      public static final double kOffset = 0.4;
-      public static final Translation2d kLocation = new Translation2d(-kWheelBaseLength / 2, kWheelBaseWidth / 2);
-    }
-
-    public static final class RearRight {
-      public static final int kDrive = 21;
-      public static final int kAziumth = 22;
-      public static final int kAbsEnc = 2;
-      public static final double kOffset = 6.2;
-      public static final Translation2d kLocation = new Translation2d(-kWheelBaseLength / 2, -kWheelBaseWidth / 2);
-    }
-
-    public static final double kTransSlewRate = 14.0;
-    public static final double kRotSlewRate = 16.0;
-
-    public static final double kMaxSpeedMetersPerSecond = 4.9;
-    public static final double kMaxAngularSpeed = 2 * Math.PI;
-    public static final double kMaxAngularAccel = 1.5 * Math.PI;
-
-    public static final class KeepAngle {
-      public static final double kp = 0.30;
-      public static final double ki = 0.0;
-      public static final double kd = 0.0;
-    }
-
-    public static final SwerveDriveKinematics kSwerveKinematics = new SwerveDriveKinematics(FrontLeft.kLocation,
-        FrontRight.kLocation, RearLeft.kLocation, RearRight.kLocation);
-
-    public static final double kRotTransFactor = 0.045;
-  }
-
-  public static final class GlobalConstants {
-    public static final double kVoltCompensation = 12.6; // Sets a voltage compensation value ideally 12.6V
-    public static final int PCHID = 20;
-    public static final int PDHID = 0;
-    public static final double kLoopTime = 0.020;
+  public static final class Controllers {
+    public static final int driver = 0;
   }
 }

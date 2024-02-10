@@ -1,25 +1,12 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
-import frc.robot.Constants.Operator;
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
-
-import com.pathplanner.lib.auto.AutoBuilder;
-
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+// import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
+// import frc.robot.commands.*;
+// import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -28,69 +15,38 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * the {@link Robot}
  * periodic methods (other than the scheduler calls). Instead, the structure of
  * the robot (including
- * subsystems, commands, and trigger mappings) should be declared here.
+ * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  private final CommandXboxController m_driverController = new CommandXboxController(
-      Operator.kDriverControllerPort);
+    /* controllers */
+    private CommandXboxController m_driver;
 
-  // The robot's subsystems and commands are defined here...
-  private final Drivetrain m_Drivetrain = new Drivetrain();
-  // private final Shooter m_Shooter = new Shooter();
+    /* subsystems */
 
-  private final Drive m_Drive = new Drive(m_Drivetrain, m_driverController);
-  // private final SendableChooser<Command> m_chooser;
+    /**
+     * The container for the robot. Contains subsystems, OI devices, and commands.
+     */
+    public RobotContainer() {
+        /* initialize all instance variables */
+        // controllers
+        this.m_driver = new CommandXboxController(Constants.Controllers.driver);
+        /* subsystems */
+        
+        // Configure the button bindings
+        configureButtonBindings();
+    }
 
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
-  public RobotContainer() {
-    m_Drivetrain.setDefaultCommand(m_Drive);
-    // m_chooser = AutoBuilder.buildAutoChooser();
-    // SmartDashboard.putData("Auto Chooser", m_chooser);
-    // Configure the trigger bindings
-    configureBindings();
-
-  }
-
-  /**
-   * Use this method to define your trigger->command mappings. Triggers can be
-   * created via the
-   * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with
-   * an arbitrary
-   * predicate, or via the named factories in {@link
-   * edu.wpi.first.wpilibj2.command.button.CommandGenericHID}'s subclasses for
-   * {@link
-   * CommandXboxController
-   * Xbox}/{@link edu.wpi.first.wpilibj2.command.button.CommandPS4Controller
-   * PS4} controllers or
-   * {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
-   * joysticks}.
-   */
-  private void configureBindings() {
-    // m_driverController.b().toggleOnTrue(Commands.startEnd(
-    // // command start
-    // () -> m_Shooter.setSpeed(0.2),
-    // // command end
-    // () -> m_Shooter.stop(),
-    // // required subsystem
-    // m_Shooter));
-
-    // m_driverController.a().toggleOnTrue(Commands.startEnd(
-    // // command start
-    // () -> m_Shooter.setSpeed(0.2),
-    // // command end
-    // () -> m_Shooter.stop(),
-    // // required subsystem
-    // m_Shooter));
-  }
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  // public Command getAutonomousCommand() {
-  // return m_chooser.getSelected();
-  // }
+    /**
+     * Use this method to define your button->command mappings. Buttons can be
+     * created by
+     * instantiating a {@link GenericHID} or one of its subclasses ({@link
+     * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing
+     * it to a {@link
+     * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+     */
+    private void configureButtonBindings() {
+        /* this is where you bind controller buttons to actions. more information can be found at 
+        https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html */
+        
+    }
 }
