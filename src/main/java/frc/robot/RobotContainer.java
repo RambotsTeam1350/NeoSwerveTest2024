@@ -17,11 +17,10 @@ import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 // import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-// import frc.robot.commands.*;
-// import frc.robot.subsystems.*;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.AbsoluteDriveAdv;
-import frc.robot.subsystems.Swerve;
+
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -33,13 +32,11 @@ import frc.robot.subsystems.Swerve;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-    /* controllers */
-    private CommandXboxController m_driver = new CommandXboxController(Constants.Controllers.Driver.id);;
     /* subsystems */
     private final Swerve drivebase = new Swerve(new File(Filesystem.getDeployDirectory(),
             "swerve"));
 
-    XboxController driverXbox = new XboxController(Constants.Controllers.Driver.id);
+    CommandXboxController driverXbox = new CommandXboxController(Constants.Controllers.Driver.id);
 
     /* subsystems */
 
@@ -59,10 +56,10 @@ public class RobotContainer {
                         Constants.Controllers.Driver.LEFT_X_DEADBAND),
                 () -> MathUtil.applyDeadband(driverXbox.getRightX(),
                         Constants.Controllers.Driver.RIGHT_X_DEADBAND),
-                driverXbox::getYButtonPressed,
-                driverXbox::getAButtonPressed,
-                driverXbox::getXButtonPressed,
-                driverXbox::getBButtonPressed);
+                driverXbox.getHID()::getYButtonPressed,
+                driverXbox.getHID()::getAButtonPressed,
+                driverXbox.getHID()::getXButtonPressed,
+                driverXbox.getHID()::getBButtonPressed);
 
         // Applies deadbands and inverts controls because joysticks
         // are back-right positive while robot
@@ -109,14 +106,20 @@ public class RobotContainer {
          * https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands
          * -to-triggers.html
          */
-        new JoystickButton(driverXbox, 1).onTrue((new InstantCommand(drivebase::zeroGyro)));
+        driverXbox.a().onTrue(new InstantCommand(drivebase::zeroGyro));
+        // new JoystickButton(driverXbox, 1).onTrue((new
+        // InstantCommand(drivebase::zeroGyro)));
         // new JoystickButton(driverXbox, 3).onTrue(new
         // InstantCommand(drivebase::addFakeVisionReading));
-        new JoystickButton(driverXbox,
-                2).whileTrue(
-                        Commands.deferredProxy(() -> drivebase.driveToPose(
-                                new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))));
-        new JoystickButton(driverXbox, 3).whileTrue(new RepeatCommand(new InstantCommand(drivebase::lock, drivebase)));
+        driverXbox.b().whileTrue(Commands.deferredProxy(() -> drivebase.driveToPose(
+                new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))));
+        // new JoystickButton(driverXbox,
+        // 2).whileTrue(
+        // Commands.deferredProxy(() -> drivebase.driveToPose(
+        // new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))));
+        driverXbox.x().whileTrue(new RepeatCommand(new InstantCommand(drivebase::lock, drivebase)));
+        // new JoystickButton(driverXbox, 3).whileTrue(new RepeatCommand(new
+        // InstantCommand(drivebase::lock, drivebase)));
     }
 
     public void setDriveMode() {
