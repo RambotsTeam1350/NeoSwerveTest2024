@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -22,6 +23,8 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_RobotContainer;
 
+  private Timer disabledTimer;
+
   /**
    * This function is run when the robot is first started up and should be used
    * for any
@@ -33,6 +36,7 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     m_RobotContainer = new RobotContainer();
+    disabledTimer = new Timer();
   }
 
   /**
@@ -60,10 +64,17 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
+    m_RobotContainer.setMotorBrake(true);
+    disabledTimer.reset();
+    disabledTimer.start();
   }
 
   @Override
   public void disabledPeriodic() {
+    if (disabledTimer.hasElapsed(Constants.DrivebaseConstants.WHEEL_LOCK_TIME)) {
+      m_RobotContainer.setMotorBrake(false);
+      disabledTimer.stop();
+    }
   }
 
   /**
@@ -72,6 +83,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    m_RobotContainer.setMotorBrake(true);
     // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // // schedule the autonomous command (example)
@@ -94,6 +106,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+
+    m_RobotContainer.setDriveMode();
+    m_RobotContainer.setMotorBrake(true);
   }
 
   /** This function is called periodically during operator control. */
