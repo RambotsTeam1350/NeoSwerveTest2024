@@ -57,18 +57,18 @@ public class Swerve extends SubsystemBase {
         // Angle conversion factor is 360 / (GEAR RATIO * ENCODER RESOLUTION)
         // In this case the gear ratio is 12.8 motor revolutions per wheel rotation.
         // The encoder resolution per motor revolution is 1 per motor revolution.
-        double angleConversionFactor = SwerveMath.calculateDegreesPerSteeringRotation(12.8);
+        // double angleConversionFactor = SwerveMath.calculateDegreesPerSteeringRotation(12.8);
         // Motor conversion factor is (PI * WHEEL DIAMETER IN METERS) / (GEAR RATIO *
         // ENCODER RESOLUTION).
         // In this case the wheel diameter is 4 inches, which must be converted to
         // meters to get meters/second.
         // The gear ratio is 6.75 motor revolutions per wheel rotation.
         // The encoder resolution per motor revolution is 1 per motor revolution.
-        double driveConversionFactor = SwerveMath.calculateMetersPerRotation(Units.inchesToMeters(4), 6.75);
-        System.out.println("\"conversionFactor\": {");
-        System.out.println("\t\"angle\": " + angleConversionFactor + ",");
-        System.out.println("\t\"drive\": " + driveConversionFactor);
-        System.out.println("}");
+        // double driveConversionFactor = SwerveMath.calculateMetersPerRotation(Units.inchesToMeters(4), 6.75);
+        // System.out.println("\"conversionFactor\": {");
+        // System.out.println("\t\"angle\": " + angleConversionFactor + ",");
+        // System.out.println("\t\"drive\": " + driveConversionFactor);
+        // System.out.println("}");
 
         // Configure the Telemetry before creating the SwerveDrive to avoid unnecessary
         // objects being created.
@@ -282,7 +282,7 @@ public class Swerve extends SubsystemBase {
                     new Translation2d(Math.pow(translationX.getAsDouble(), 3) * swerveDrive.getMaximumVelocity(),
                             Math.pow(translationY.getAsDouble(), 3) * swerveDrive.getMaximumVelocity()),
                     Math.pow(angularRotationX.getAsDouble(), 3) * swerveDrive.getMaximumAngularVelocity(),
-                    true,
+                    false,
                     false);
         });
     }
@@ -516,10 +516,10 @@ public class Swerve extends SubsystemBase {
         return swerveDrive.getPitch();
     }
 
-    /**
-     * Add a fake vision reading for testing purposes.
-     */
-    public void addFakeVisionReading() {
-        swerveDrive.addVisionMeasurement(new Pose2d(3, 3, Rotation2d.fromDegrees(65)), Timer.getFPGATimestamp());
-    }
+    // /**
+    //  * Add a fake vision reading for testing purposes.
+    //  */
+    // public void addFakeVisionReading() {
+    //     swerveDrive.addVisionMeasurement(new Pose2d(3, 3, Rotation2d.fromDegrees(65)), Timer.getFPGATimestamp());
+    // }
 }

@@ -87,8 +87,10 @@ public class RobotContainer {
                 () -> MathUtil.applyDeadband(driverXbox.getLeftX(), Constants.Controllers.Driver.LEFT_X_DEADBAND),
                 () -> driverXbox.getRawAxis(2));
 
-        drivebase.setDefaultCommand(
-                !RobotBase.isSimulation() ? driveFieldOrientedDirectAngle : driveFieldOrientedDirectAngleSim);
+
+        drivebase.setDefaultCommand(driveFieldOrientedAnglularVelocity);
+        // drivebase.setDefaultCommand(
+        //         !RobotBase.isSimulation() ? driveFieldOrientedAnglularVelocity : driveFieldOrientedDirectAngleSim);
     }
 
     /**
